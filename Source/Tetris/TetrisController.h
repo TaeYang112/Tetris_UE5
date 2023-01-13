@@ -15,20 +15,17 @@ class TETRIS_API ATetrisController : public APlayerController
 	GENERATED_BODY()
 
 
-	protected:
+protected:
 	ATetrisController();
 	virtual void BeginPlay() override;
 
 	
-	private:
-	UPROPERTY()
-	class UTetrisHud* HUDWidget;
+private:
 	UPROPERTY()
 	class UUserWidget* MainWidget;
 	UPROPERTY()
 	class UUserWidget* GameOverWidget;
-
-	TSubclassOf<UTetrisHud> HudClass;
+	
 	TSubclassOf<UUserWidget> MainWidgetClass;
 	TSubclassOf<UUserWidget> OverWidgetClass;
 
@@ -36,10 +33,9 @@ class TETRIS_API ATetrisController : public APlayerController
 	FInputModeUIOnly UIMode;
 
 	bool IsReady;
-	public:
+public:
 
 	UFUNCTION(BlueprintCallable)
-	void GameStart();
 	void ShowOverWidget();
 	void ReadyToWidget();
 	void ShowMainWidget();

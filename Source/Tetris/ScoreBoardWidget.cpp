@@ -1,11 +1,3 @@
-
-
-
-
-
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "ScoreBoardWidget.h"
 #include "TetrisGameState.h"
 #include "TetrisSaveGame.h"
@@ -19,25 +11,36 @@ void UScoreBoardWidget::NativeConstruct()
 	GameState = Cast<ATetrisGameState>(UGameplayStatics::GetGameState(GetWorld()));
 	UTetrisSaveGame* SaveGameInstance = Cast<UTetrisSaveGame>(UGameplayStatics::LoadGameFromSlot(TEXT("SaveData"), 0));
 	TArray<int32> ScoreBoard = SaveGameInstance->ScoreBoard;
+
+	// 점수 정렬
 	ScoreBoard.Sort([](const int32 &A, const int32 &B)
                                 { return A > B;});
-	if(ScoreBoard.IsValidIndex(0)) FirstScore->SetText(FText::FromString(FString::FromInt(ScoreBoard[0])));
-	else FirstScore->SetText(FText::FromString(TEXT("0")));
 
-	if(ScoreBoard.IsValidIndex(0)) SecondScore->SetText(FText::FromString(FString::FromInt(ScoreBoard[1])));
-	else SecondScore->SetText(FText::FromString(TEXT("0")));
+	// 텍스트 설정
+	if(ScoreBoard.IsValidIndex(0))
+		FirstScore->SetText(FText::FromString(FString::FromInt(ScoreBoard[0])));
+	else
+		FirstScore->SetText(FText::FromString(TEXT("0")));
 
-	if(ScoreBoard.IsValidIndex(0)) ThirdScore->SetText(FText::FromString(FString::FromInt(ScoreBoard[2])));
-	else ThirdScore->SetText(FText::FromString(TEXT("0")));
+	if(ScoreBoard.IsValidIndex(1))
+		SecondScore->SetText(FText::FromString(FString::FromInt(ScoreBoard[1])));
+	else
+		SecondScore->SetText(FText::FromString(TEXT("0")));
 
-	if(ScoreBoard.IsValidIndex(0)) FourthScore->SetText(FText::FromString(FString::FromInt(ScoreBoard[3])));
-	else FourthScore->SetText(FText::FromString(TEXT("0")));
+	if(ScoreBoard.IsValidIndex(2))
+		ThirdScore->SetText(FText::FromString(FString::FromInt(ScoreBoard[2])));
+	else
+		ThirdScore->SetText(FText::FromString(TEXT("0")));
 
-	if(ScoreBoard.IsValidIndex(0)) FifthScore->SetText(FText::FromString(FString::FromInt(ScoreBoard[4])));
-	else FifthScore->SetText(FText::FromString(TEXT("0")));
+	if(ScoreBoard.IsValidIndex(3))
+		FourthScore->SetText(FText::FromString(FString::FromInt(ScoreBoard[3])));
+	else
+		FourthScore->SetText(FText::FromString(TEXT("0")));
 
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, FString::Printf(TEXT("FirstScore : %d"), ScoreBoard[0]));
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, FString::Printf(TEXT("ScoreCount : %d"), ScoreBoard.Num()));
+	if(ScoreBoard.IsValidIndex(4))
+		FifthScore->SetText(FText::FromString(FString::FromInt(ScoreBoard[4])));
+	else
+		FifthScore->SetText(FText::FromString(TEXT("0")));
 }
 
 void UScoreBoardWidget::UpdateWidget()

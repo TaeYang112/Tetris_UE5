@@ -6,63 +6,57 @@
 
 ATetrisController::ATetrisController()
 {
-	
-	ConstructorHelpers::FClassFinder<UTetrisHud> HUD_C(TEXT("WidgetBlueprint'/Game/Tetris/BluePrint/HudWidget.HudWidget_C'"));
-	if(HUD_C.Succeeded())
-	{
-		HudClass = HUD_C.Class;
-	}
-	ConstructorHelpers::FClassFinder<UUserWidget> MAIN_C(TEXT("WidgetBlueprint'/Game/Tetris/BluePrint/GameStartWidget.GameStartWidget_C'"));
+	// 메인화면 위젯 블루프린트를 가져옴
+	static ConstructorHelpers::FClassFinder<UUserWidget> MAIN_C(TEXT("WidgetBlueprint'/Game/Tetris/BluePrint/GameStartWidget.GameStartWidget_C'"));
 	if(MAIN_C.Succeeded())
 	{
 		MainWidgetClass = MAIN_C.Class;
 	}
-	ConstructorHelpers::FClassFinder<UUserWidget> OVER_C(TEXT("WidgetBlueprint'/Game/Tetris/BluePrint/GameOverWidget.GameOverWidget_C'"));
+
+	// 게임 오버시 등장하는 위젯 블루프린트를 가져옴
+	static ConstructorHelpers::FClassFinder<UUserWidget> OVER_C(TEXT("WidgetBlueprint'/Game/Tetris/BluePrint/GameOverWidget.GameOverWidget_C'"));
 	if(OVER_C.Succeeded())
 	{
 		OverWidgetClass = OVER_C.Class;
 	}
 	
+	// 변수 초기화
 	IsReady = false;
+
+	// 사용자의 마우스가 보이도록 설정
 	SetShowMouseCursor(true);
 
 }
 void ATetrisController::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	ReadyToWidget();
+	ShowMainWidget();
 }
 
+// 위젯 할당
 void ATetrisController::ReadyToWidget()
 {
-	IsReady = true;
 	MainWidget = CreateWidget<UUserWidget>(this, MainWidgetClass);
-	HUDWidget = CreateWidget<UTetrisHud>(this, HudClass);
 	GameOverWidget = CreateWidget<UUserWidget>(this, OverWidgetClass);
 }
+
+// 메인 메뉴 위젯 표시
 void ATetrisController::ShowMainWidget()
 {
-	if(IsReady == false) ReadyToWidget();
-	
 	SetInputMode(UIMode);
-	if(!MainWidget->IsInViewport()) MainWidget->AddToViewport();
+	
+	if(!MainWidget->IsInViewport())
+		MainWidget->AddToViewport();
 }
 
 
-void ATetrisController::GameStart()
-{
-	if(IsReady == false) ReadyToWidget();
-	
-	if(GameOverWidget->IsInViewport()) GameOverWidget->RemoveFromViewport();
-	if(MainWidget->IsInViewport()) MainWidget->RemoveFromViewport();
-	
-	SetInputMode(InputMode);
-	if(!HUDWidget->IsInViewport()) HUDWidget->AddToViewport();
-}
-
+// 게임 오버 위젯 표시
 void ATetrisController::ShowOverWidget()
 {
 	SetInputMode(UIMode);
-	if(!GameOverWidget->IsInViewport()) GameOverWidget->AddToViewport();
+	
+	if(!GameOverWidget->IsInViewport())
+		GameOverWidget->AddToViewport();
 }
 

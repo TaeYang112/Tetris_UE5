@@ -14,18 +14,21 @@ class TETRIS_API UScoreBoardWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
-	private:
+private:
+
 	UPROPERTY()
 	class ATetrisGameState* GameState;
 
+	// 위젯 업데이트
 	UFUNCTION(BlueprintCallable)
 	void UpdateWidget();
 
 	
-	protected:
+protected:
 	
 	virtual void NativeConstruct() override;
 
+	// 스코어 보드에서 점수를 표시하는 텍스트 블록
 	UPROPERTY(Meta = (BindWidget))
 	class UTextBlock* FirstScore;
 

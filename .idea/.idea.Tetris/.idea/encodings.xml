@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise" />
+  <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise">
+    <file url="file://$PROJECT_DIR$/Source/Tetris/CameraPawn.cpp" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Source/Tetris/CameraPawn.h" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Source/Tetris/Cube.cpp" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Source/Tetris/Cube.h" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Source/Tetris/ScoreBoardWidget.h" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Source/Tetris/TetrisController.cpp" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Source/Tetris/TetrisGameMode.h" charset="x-windows-949" />
+  </component>
 </project>

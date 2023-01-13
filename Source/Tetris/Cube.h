@@ -14,18 +14,13 @@ class TETRIS_API ACube : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	ACube();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	// 큐브의 색과 투명도 설정
 	void setColor(BlockType type,float opacity);
 
+	// 메쉬 컴포넌트
 	UPROPERTY()
 	UStaticMeshComponent *Mesh;
 
